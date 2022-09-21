@@ -1,6 +1,7 @@
 package com.lemon.violet.controller;
 
 import com.lemon.violet.pojo.po.Blog;
+import com.lemon.violet.pojo.vo.RespVo;
 import com.lemon.violet.service.BlogService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,7 @@ public class BlogController {
     private BlogService blogService;
 
     @PostMapping("/mysqlAll")
-    public List<Blog> queryMysqlAll(){
-        return blogService.list();
+    public RespVo queryMysqlAll(){
+        return RespVo.success(blogService.list());
     }
 }

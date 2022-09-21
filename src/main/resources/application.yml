@@ -9,3 +9,14 @@ spring:
       driver-class-name: com.mysql.cj.jdbc.Driver
       username: root
       password: 520.hate
+  # mvc
+  mvc:
+    static-path-pattern: /**
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      additional-paths: static/**
+  #日期格式化
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss

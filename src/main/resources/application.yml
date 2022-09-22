@@ -20,7 +20,7 @@ spring:
   #日期格式化
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
-mybatis-plus:
-  global-config:
-    db-config:
-      table-prefix: t_
+#mybatis-plus:
+#  global-config:
+#    db-config:
+#      table-prefix: t_

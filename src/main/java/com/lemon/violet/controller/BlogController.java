@@ -20,5 +20,9 @@ public class BlogController {
     @PostMapping("/mysqlAll")
     public RespVo queryMysqlAll(){
         return RespVo.success(blogService.list());
+    } @PostMapping("/queryMysqlPage")
+    public RespVo queryMysqlPage(){
+        return blogService.queryMysqlPage();
     }
+
 }

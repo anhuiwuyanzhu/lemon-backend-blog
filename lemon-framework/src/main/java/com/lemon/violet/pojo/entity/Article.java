@@ -3,10 +3,15 @@ package com.lemon.violet.pojo.entity;
 import java.util.Date;
 import java.io.Serializable;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 /**
@@ -17,6 +22,7 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @TableName("sg_article")
+//@Accessors(chain = true)
 public class Article {
     
     private Long id;
@@ -28,6 +34,9 @@ public class Article {
     private String summary;
     //所属分类id
     private Long categoryId;
+    //所属分类id
+    @TableField(exist = false)
+    private String categoryName;
     //缩略图
     private String thumbnail;
     //是否置顶（0否，1是）
@@ -40,13 +49,14 @@ public class Article {
     private String isComment;
     
     private Long createBy;
-    
+
     private Date createTime;
     
     private Long updateBy;
     
     private Date updateTime;
     //删除标志（0代表未删除，1代表已删除）
+    @TableLogic
     private Integer delFlag;
 }
 

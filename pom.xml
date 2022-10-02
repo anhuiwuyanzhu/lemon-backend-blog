@@ -16,7 +16,7 @@
 
 
     <properties>
-        <project.build.sourceEncoding>URF-8</project.build.sourceEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
     </properties>
 <!--  这些jar包并不是真正的引入了，只是对子依赖的版本锁定  -->

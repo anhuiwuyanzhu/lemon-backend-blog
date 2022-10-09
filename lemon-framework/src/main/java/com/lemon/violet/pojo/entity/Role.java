@@ -13,8 +13,8 @@ import lombok.Data;
  * @since 2022-09-24 20:16:04
  */
 @Data
-@TableName("sg_sys_role")
-public class SysRole {
+@TableName("sys_role")
+public class Role {
     //角色ID
     private Long id;
     //角色名称

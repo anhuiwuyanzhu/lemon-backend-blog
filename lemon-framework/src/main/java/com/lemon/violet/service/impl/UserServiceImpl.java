@@ -2,8 +2,8 @@ package com.lemon.violet.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lemon.violet.dao.SysUserDao;
-import com.lemon.violet.pojo.entity.SysUser;
-import com.lemon.violet.service.SysUserService;
+import com.lemon.violet.pojo.entity.User;
+import com.lemon.violet.service.UserService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
  * @since 2022-09-24 20:16:04
  */
 @Service("sysUserService")
-public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUser> implements SysUserService {
+public class UserServiceImpl extends ServiceImpl<SysUserDao, User> implements UserService {
 
 }
 

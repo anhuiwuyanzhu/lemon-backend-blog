@@ -1,7 +1,7 @@
 package com.lemon.violet.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.lemon.violet.pojo.entity.SysUserRole;
+import com.lemon.violet.pojo.entity.UserRole;
 
 /**
  * 用户和角色关联表(SysUserRole)表服务接口
@@ -9,7 +9,7 @@ import com.lemon.violet.pojo.entity.SysUserRole;
  * @author makejava
  * @since 2022-09-24 20:16:05
  */
-public interface SysUserRoleService extends IService<SysUserRole> {
+public interface UserRoleService extends IService<UserRole> {
 
 }
 

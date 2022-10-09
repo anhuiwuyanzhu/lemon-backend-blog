@@ -29,5 +29,12 @@ public interface ArticleService extends IService<Article> {
      * @return
      */
     ResponseResult articleList(Integer pageNum, Integer pageSize, Integer categoryId) throws JsonProcessingException;
+
+    /**
+     * 查询文章详情
+     * @param id
+     * @return
+     */
+    ResponseResult articleInfo(String id) throws JsonProcessingException;
 }
 

@@ -2,8 +2,8 @@ package com.lemon.violet.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lemon.violet.dao.SysMenuDao;
-import com.lemon.violet.pojo.entity.SysMenu;
-import com.lemon.violet.service.SysMenuService;
+import com.lemon.violet.pojo.entity.Menu;
+import com.lemon.violet.service.MenuService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
  * @since 2022-09-24 20:16:03
  */
 @Service("sysMenuService")
-public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenu> implements SysMenuService {
+public class MenuServiceImpl extends ServiceImpl<SysMenuDao, Menu> implements MenuService {
 
 }
 

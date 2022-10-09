@@ -34,6 +34,21 @@ public class SystemConstants {
      */
     public static final Integer NO_PARENT_PID = -1;
 
+    /**
+     * 友链审核通过
+     */
+    public static final Integer LINK_STATUS_NORMAL = 0;
+
+    /**
+     * 友链申请未通过
+     */
+    public static final Integer LINK_STATUS_DISABLE = 0;
+
+    /**
+     * 友链申请中
+     */
+    public static final Integer LINK_STATUS_ONGOING = 0;
+
 
 
 }

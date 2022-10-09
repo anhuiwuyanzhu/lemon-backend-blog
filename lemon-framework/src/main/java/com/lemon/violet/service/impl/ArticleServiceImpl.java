@@ -13,10 +13,7 @@ import com.lemon.violet.dao.ArticleDao;
 import com.lemon.violet.dao.CategoryDao;
 import com.lemon.violet.pojo.entity.Article;
 import com.lemon.violet.pojo.entity.Category;
-import com.lemon.violet.pojo.vo.ArticleListVo;
-import com.lemon.violet.pojo.vo.HotArticleVo;
-import com.lemon.violet.pojo.vo.PageVo;
-import com.lemon.violet.pojo.vo.ResponseResult;
+import com.lemon.violet.pojo.vo.*;
 import com.lemon.violet.service.ArticleService;
 import com.lemon.violet.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -89,6 +86,19 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleDao, Article> impleme
         });
         PageVo<List<ArticleListVo>> pageVo = new PageVo<>(data,page.getTotal());
         return ResponseResult.success(pageVo);
+    }
+
+    @Override
+    public ResponseResult articleInfo(String id) throws JsonProcessingException {
+        //查询条件：1.文章id
+        Article article = articleDao.selectById(id);
+        Category category = categoryDao.selectById(article.getCategoryId());
+        if(!ObjectUtils.isEmpty(category)){
+            article.setCategoryName(category.getName());
+        }
+        ArticleInfoVo articleInfoVo = objectMapper.readValue(objectMapper.writeValueAsString(article), new TypeReference<ArticleInfoVo>() {
+        });
+        return ResponseResult.success(articleInfoVo);
     }
 
 

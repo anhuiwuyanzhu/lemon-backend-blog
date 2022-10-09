@@ -39,8 +39,8 @@ public class ArticleController {
 
     @GetMapping("/{id}")
     @ApiOperation(value = "查询文章详情",notes = "查询文章详情")
-    public ResponseResult queryArticleInfo(@PathVariable(name = "id") String id){
-        return null;
+    public ResponseResult queryArticleInfo(@PathVariable(name = "id") String id) throws JsonProcessingException {
+        return articleService.articleInfo(id);
     }
 
 }

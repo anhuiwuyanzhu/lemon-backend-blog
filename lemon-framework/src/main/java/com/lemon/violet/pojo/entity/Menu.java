@@ -13,8 +13,8 @@ import lombok.Data;
  * @since 2022-09-24 20:16:03
  */
 @Data
-@TableName("sg_sys_menu")
-public class SysMenu {
+@TableName("sys_menu")
+public class Menu {
     //菜单ID
     private Long id;
     //菜单名称

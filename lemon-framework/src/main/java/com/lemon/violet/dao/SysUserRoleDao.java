@@ -1,7 +1,7 @@
 package com.lemon.violet.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.lemon.violet.pojo.entity.SysUserRole;
+import com.lemon.violet.pojo.entity.UserRole;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2022-09-24 20:16:05
  */
 @Mapper
-public interface SysUserRoleDao extends BaseMapper<SysUserRole> {
+public interface SysUserRoleDao extends BaseMapper<UserRole> {
 
 }
 

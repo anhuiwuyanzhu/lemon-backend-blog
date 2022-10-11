@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2022-09-24 20:16:04
  */
 @Mapper
-public interface SysRoleMenuDao extends BaseMapper<RoleMenu> {
+public interface RoleMenuDao extends BaseMapper<RoleMenu> {
 
 }
 

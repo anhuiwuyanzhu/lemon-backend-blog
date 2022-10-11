@@ -1,7 +1,7 @@
 package com.lemon.violet.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.lemon.violet.dao.SysUserRoleDao;
+import com.lemon.violet.dao.UserRoleDao;
 import com.lemon.violet.pojo.entity.UserRole;
 import com.lemon.violet.service.UserRoleService;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
  * @since 2022-09-24 20:16:05
  */
 @Service("sysUserRoleService")
-public class UserRoleServiceImpl extends ServiceImpl<SysUserRoleDao, UserRole> implements UserRoleService {
+public class UserRoleServiceImpl extends ServiceImpl<UserRoleDao, UserRole> implements UserRoleService {
 
 }
 

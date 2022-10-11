@@ -1,7 +1,9 @@
 package com.lemon.violet.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.lemon.violet.pojo.entity.User;
+import com.lemon.violet.pojo.vo.ResponseResult;
 
 /**
  * 用户表(SysUser)表服务接口
@@ -11,5 +13,6 @@ import com.lemon.violet.pojo.entity.User;
  */
 public interface UserService extends IService<User> {
 
+    ResponseResult login(User user) throws JsonProcessingException;
 }
 

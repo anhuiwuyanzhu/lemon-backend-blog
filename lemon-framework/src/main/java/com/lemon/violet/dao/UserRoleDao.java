@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2022-09-24 20:16:05
  */
 @Mapper
-public interface SysUserRoleDao extends BaseMapper<UserRole> {
+public interface UserRoleDao extends BaseMapper<UserRole> {
 
 }
 

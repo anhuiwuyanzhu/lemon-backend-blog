@@ -4,6 +4,9 @@ import java.util.Date;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import org.springframework.lang.NonNull;
+
+import javax.validation.constraints.NotBlank;
 
 
 /**
@@ -18,10 +21,12 @@ public class User {
     //主键
     private Long id;
     //用户名
+    @NotBlank(message = "用户名不能为空")
     private String userName;
     //昵称
     private String nickName;
     //密码
+    @NotBlank(message = "密码不能为空")
     private String password;
     //用户类型：0代表普通用户，1代表管理员
     private String type;

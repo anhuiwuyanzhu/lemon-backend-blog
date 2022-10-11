@@ -1,7 +1,7 @@
 package com.lemon.violet.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.lemon.violet.dao.SysRoleMenuDao;
+import com.lemon.violet.dao.RoleMenuDao;
 import com.lemon.violet.pojo.entity.RoleMenu;
 import com.lemon.violet.service.RoleMenuService;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
  * @since 2022-09-24 20:16:04
  */
 @Service("sysRoleMenuService")
-public class RoleMenuServiceImpl extends ServiceImpl<SysRoleMenuDao, RoleMenu> implements RoleMenuService {
+public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuDao, RoleMenu> implements RoleMenuService {
 
 }
 

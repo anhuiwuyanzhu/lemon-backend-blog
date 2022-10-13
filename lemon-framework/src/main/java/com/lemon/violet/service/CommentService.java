@@ -1,7 +1,9 @@
 package com.lemon.violet.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.lemon.violet.pojo.entity.Comment;
+import com.lemon.violet.pojo.vo.ResponseResult;
 
 /**
  * 评论表(Comment)表服务接口
@@ -11,5 +13,6 @@ import com.lemon.violet.pojo.entity.Comment;
  */
 public interface CommentService extends IService<Comment> {
 
+    ResponseResult commentList(Long articleId, Integer pageNum, Integer pageSize) throws JsonProcessingException;
 }
 

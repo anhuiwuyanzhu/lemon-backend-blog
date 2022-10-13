@@ -20,6 +20,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseResult exceptionHandler(Exception e){
+        e.printStackTrace();
         //从异常对象中获取提示信息封装返回
         return ResponseResult.customize(CodeEnum.SYSTEM_ERROR.getCode(),e.getMessage(),null);
     }

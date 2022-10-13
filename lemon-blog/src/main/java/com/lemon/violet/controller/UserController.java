@@ -21,4 +21,8 @@ public class UserController {
     public ResponseResult login(@Validated @RequestBody User user) throws JsonProcessingException {
         return userService.login(user);
     }
+    @PostMapping("/logout")
+    public ResponseResult logout(){
+        return userService.logout();
+    }
 }

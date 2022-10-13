@@ -14,5 +14,7 @@ import com.lemon.violet.pojo.vo.ResponseResult;
 public interface UserService extends IService<User> {
 
     ResponseResult login(User user) throws JsonProcessingException;
+
+    ResponseResult logout();
 }
 

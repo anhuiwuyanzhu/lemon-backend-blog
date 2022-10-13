@@ -17,6 +17,7 @@ import com.lemon.violet.utils.JwtUtil;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -57,6 +58,18 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         BlogUserLoginVo vo = new BlogUserLoginVo(jwt,userInfoVo);
 
         return ResponseResult.success(vo);
+    }
+
+    @Override
+    public ResponseResult logout() {
+        //获取token 解析获取userid
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        LoginUser loginUser = (LoginUser) authentication.getPrincipal();
+        //获取userid
+        Long userId = loginUser.getUser().getId();
+        //删除redis中的用户信息
+        redisCache.deleteObject(KeyConstant.BLOG_LOGIN_KEY+userId);
+        return ResponseResult.success(null);
     }
 }
 

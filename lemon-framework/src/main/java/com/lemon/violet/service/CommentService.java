@@ -13,6 +13,10 @@ import com.lemon.violet.pojo.vo.ResponseResult;
  */
 public interface CommentService extends IService<Comment> {
 
-    ResponseResult commentList(Long articleId, Integer pageNum, Integer pageSize) throws JsonProcessingException;
+    //查询评论
+    ResponseResult commentList(String type,Long articleId, Integer pageNum, Integer pageSize) throws JsonProcessingException;
+
+    //评论
+    ResponseResult addComment(Comment comment);
 }
 

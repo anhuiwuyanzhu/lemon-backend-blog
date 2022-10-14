@@ -14,6 +14,7 @@ import com.lemon.violet.pojo.vo.ResponseResult;
 import com.lemon.violet.pojo.vo.UserInfoVo;
 import com.lemon.violet.service.UserService;
 import com.lemon.violet.utils.JwtUtil;
+import com.lemon.violet.utils.SecurityUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -70,6 +71,16 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         //删除redis中的用户信息
         redisCache.deleteObject(KeyConstant.BLOG_LOGIN_KEY+userId);
         return ResponseResult.success(null);
+    }
+
+    @Override
+    public ResponseResult userInfo() throws JsonProcessingException {
+        Long userId = SecurityUtils.getUserId();
+        User user = userDao.selectById(userId);
+
+        UserInfoVo vo = objectMapper.readValue(objectMapper.writeValueAsString(user), new TypeReference<UserInfoVo>() {
+        });
+        return ResponseResult.success(vo);
     }
 }
 

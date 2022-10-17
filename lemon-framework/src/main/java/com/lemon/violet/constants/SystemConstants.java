@@ -49,6 +49,11 @@ public class SystemConstants {
      */
     public static final Integer LINK_STATUS_ONGOING = 0;
 
+    /**
+     * 图片上传类型
+     */
+    public static final String JPG = ".jpg";
 
+    public static final String PNG = ".png";
 
 }

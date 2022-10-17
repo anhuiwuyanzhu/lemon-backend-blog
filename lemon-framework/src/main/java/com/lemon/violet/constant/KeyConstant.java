@@ -5,4 +5,5 @@ public class KeyConstant {
     public static final Integer ROOT_COMMENT = -1;
     public static final String ARTICLE_COMMENT = "0";
     public static final String LINK_COMMENT = "1";
+    public static final String PROTOCOL_HTTP = "http";
 }

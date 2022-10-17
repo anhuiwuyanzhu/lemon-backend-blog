@@ -25,3 +25,9 @@ mybatis-plus:
       logic-delete-value: 1
       logic-not-delete-value: 0
       id-type: auto
+qiniuyun:
+  oss:
+    accessKey: AdUZYWSWIe18u0Ye1GCElGrCAhPcQj1zzjsRKCyL
+    secretKey: W8DtHMmJPRvn-_gfa3sGT8kndEtaiOJZF6qjoCP-
+    bucket: violet-blogs
+    domain: rjqi007tt.bkt.clouddn.com

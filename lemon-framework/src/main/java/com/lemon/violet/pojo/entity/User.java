@@ -24,6 +24,7 @@ public class User {
     @NotBlank(message = "用户名不能为空")
     private String userName;
     //昵称
+    @NotBlank(message = "昵称不能为空")
     private String nickName;
     //密码
     @NotBlank(message = "密码不能为空")
@@ -33,6 +34,7 @@ public class User {
     //账号状态（0正常 1停用）
     private String status;
     //邮箱
+    @NotBlank(message = "邮箱不能为空")
     private String email;
     //手机号
     private String phonenumber;

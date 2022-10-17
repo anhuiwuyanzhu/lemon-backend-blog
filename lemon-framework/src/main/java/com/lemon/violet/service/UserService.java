@@ -18,5 +18,9 @@ public interface UserService extends IService<User> {
     ResponseResult logout();
 
     ResponseResult userInfo() throws JsonProcessingException;
+
+    ResponseResult updateUserInfo(User user);
+
+    ResponseResult register(User user);
 }
 

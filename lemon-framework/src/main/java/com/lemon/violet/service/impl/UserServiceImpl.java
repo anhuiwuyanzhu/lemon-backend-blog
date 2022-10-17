@@ -1,5 +1,6 @@
 package com.lemon.violet.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -19,6 +20,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -40,6 +42,8 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
     private RedisCache redisCache;
     @Resource
     private ObjectMapper objectMapper;
+    @Resource
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public ResponseResult login(User user) throws JsonProcessingException {
@@ -65,6 +69,10 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
     public ResponseResult logout() {
         //获取token 解析获取userid
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Object principal = authentication.getPrincipal();
+        if(!(principal instanceof LoginUser)){
+            return ResponseResult.success(null);
+        }
         LoginUser loginUser = (LoginUser) authentication.getPrincipal();
         //获取userid
         Long userId = loginUser.getUser().getId();
@@ -81,6 +89,30 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         UserInfoVo vo = objectMapper.readValue(objectMapper.writeValueAsString(user), new TypeReference<UserInfoVo>() {
         });
         return ResponseResult.success(vo);
+    }
+
+    @Override
+    public ResponseResult updateUserInfo(User user) {
+        int i = userDao.updateById(user);
+        return ResponseResult.success(i);
+    }
+
+    @Override
+    public ResponseResult register(User user) {
+
+        //重复条件判断
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+//        queryWrapper.eq(User::getUserName,user.getUserName())
+//                .or(new LambdaQueryWrapper<User>().eq(User::getNickName,user.getNickName()))
+//                .or(new LambdaQueryWrapper<User>().eq(User::getAvatar,user.getAvatar()))
+//                .or(new LambdaQueryWrapper<User>().eq(User::getEmail,user.getEmail()));
+
+
+        //密码加密
+        String encode = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encode);
+
+        return null;
     }
 }
 

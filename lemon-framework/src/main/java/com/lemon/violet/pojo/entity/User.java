@@ -21,20 +21,16 @@ public class User {
     //主键
     private Long id;
     //用户名
-    @NotBlank(message = "用户名不能为空")
     private String userName;
     //昵称
-    @NotBlank(message = "昵称不能为空")
     private String nickName;
     //密码
-    @NotBlank(message = "密码不能为空")
     private String password;
     //用户类型：0代表普通用户，1代表管理员
     private String type;
     //账号状态（0正常 1停用）
     private String status;
     //邮箱
-    @NotBlank(message = "邮箱不能为空")
     private String email;
     //手机号
     private String phonenumber;

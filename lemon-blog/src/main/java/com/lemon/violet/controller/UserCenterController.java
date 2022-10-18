@@ -2,6 +2,7 @@ package com.lemon.violet.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.lemon.violet.pojo.entity.User;
+import com.lemon.violet.pojo.rto.RegisterRto;
 import com.lemon.violet.pojo.vo.ResponseResult;
 import com.lemon.violet.service.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,7 @@ public class UserCenterController {
     }
 
     @PostMapping("/register")
-    public ResponseResult register(@RequestBody User user){
-        return userService.register(user);
+    public ResponseResult register(@RequestBody RegisterRto registerRto) throws JsonProcessingException {
+        return userService.register(registerRto);
     }
 }

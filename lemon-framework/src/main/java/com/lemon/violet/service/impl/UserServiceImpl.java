@@ -10,6 +10,8 @@ import com.lemon.violet.constant.KeyConstant;
 import com.lemon.violet.dao.UserDao;
 import com.lemon.violet.pojo.dto.LoginUser;
 import com.lemon.violet.pojo.entity.User;
+import com.lemon.violet.pojo.rto.LoginRto;
+import com.lemon.violet.pojo.rto.RegisterRto;
 import com.lemon.violet.pojo.vo.BlogUserLoginVo;
 import com.lemon.violet.pojo.vo.ResponseResult;
 import com.lemon.violet.pojo.vo.UserInfoVo;
@@ -46,7 +48,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
     private BCryptPasswordEncoder passwordEncoder;
 
     @Override
-    public ResponseResult login(User user) throws JsonProcessingException {
+    public ResponseResult login(LoginRto user) throws JsonProcessingException {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user.getUserName(),user.getPassword());
         Authentication authenticate = manager.authenticate(authenticationToken);
         if(ObjectUtils.isEmpty(authenticate)){
@@ -98,21 +100,31 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
     }
 
     @Override
-    public ResponseResult register(User user) {
+    public ResponseResult register(RegisterRto registerRto) throws JsonProcessingException {
 
         //重复条件判断
-        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
-//        queryWrapper.eq(User::getUserName,user.getUserName())
-//                .or(new LambdaQueryWrapper<User>().eq(User::getNickName,user.getNickName()))
-//                .or(new LambdaQueryWrapper<User>().eq(User::getAvatar,user.getAvatar()))
-//                .or(new LambdaQueryWrapper<User>().eq(User::getEmail,user.getEmail()));
+        if(!ObjectUtils.isEmpty(userDao.selectList(new LambdaQueryWrapper<User>().eq(User::getUserName,registerRto.getUserName())))){
+            return ResponseResult.checkFail("用户名已存在");
+        }
+        if(!ObjectUtils.isEmpty(userDao.selectList(new LambdaQueryWrapper<User>().eq(User::getNickName,registerRto.getNickName())))){
+            return ResponseResult.checkFail("昵称已存在");
+        }
+        if(!ObjectUtils.isEmpty(userDao.selectList(new LambdaQueryWrapper<User>().eq(User::getEmail,registerRto.getEmail())))){
+            return ResponseResult.checkFail("邮箱已存在");
+        }
 
 
         //密码加密
-        String encode = passwordEncoder.encode(user.getPassword());
-        user.setPassword(encode);
+        String encode = passwordEncoder.encode(registerRto.getPassword());
+        registerRto.setPassword(encode);
+        User user = objectMapper.readValue(objectMapper.writeValueAsString(registerRto), new TypeReference<User>() {
+        });
+        int row = userDao.insert(user);
 
-        return null;
+        if(row > 0){
+            return ResponseResult.success("注册成功!");
+        }
+        return ResponseResult.checkFail("注册失败!");
     }
 }
 

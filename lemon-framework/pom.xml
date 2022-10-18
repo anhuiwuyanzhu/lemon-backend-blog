@@ -87,13 +87,12 @@
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.squareup.okhttp3</groupId>
-            <artifactId>okhttp</artifactId>
-            <version>3.14.2</version>
-            <scope>compile</scope>
-        </dependency>
-
+<!--        <dependency>-->
+<!--            <groupId>com.squareup.okhttp3</groupId>-->
+<!--            <artifactId>okhttp</artifactId>-->
+<!--            <version>3.14.2</version>-->
+<!--            <scope>compile</scope>-->
+<!--        </dependency>-->
 
         <!--七牛云 -->
         <dependency>

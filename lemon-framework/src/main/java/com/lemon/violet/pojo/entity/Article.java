@@ -24,7 +24,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 @TableName("sg_article")
 //@Accessors(chain = true)
 public class Article {
-    
+//    public Article(Long id, long viewCount) {
+//        this.id = id;
+//        this.viewCount = viewCount;
+//    }
     private Long id;
     //标题
     private String title;

@@ -36,5 +36,7 @@ public interface ArticleService extends IService<Article> {
      * @return
      */
     ResponseResult articleInfo(String id) throws JsonProcessingException;
+
+    ResponseResult updateViewCount(Long id);
 }
 

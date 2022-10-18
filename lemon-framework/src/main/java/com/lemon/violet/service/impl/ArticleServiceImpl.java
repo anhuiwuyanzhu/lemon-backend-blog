@@ -8,6 +8,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.util.BeanUtil;
+import com.lemon.violet.config.RedisCache;
+import com.lemon.violet.constant.KeyConstant;
 import com.lemon.violet.constants.SystemConstants;
 import com.lemon.violet.dao.ArticleDao;
 import com.lemon.violet.dao.CategoryDao;
@@ -39,7 +41,8 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleDao, Article> impleme
     private ArticleDao articleDao;
     @Resource
     private CategoryDao categoryDao;
-
+    @Resource
+    private RedisCache redisCache;
     @Resource
     private ObjectMapper objectMapper;
 
@@ -57,6 +60,10 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleDao, Article> impleme
 
         //结果封装
         List<Article> records = articlePage.getRecords();
+        records.stream().forEach(article -> {
+            Integer viewCount = redisCache.getCacheMapValue("article:viewCount", article.getId().toString());
+            article.setViewCount(viewCount.longValue());
+        });
         List<HotArticleVo> hotArticleVos = objectMapper.readValue(objectMapper.writeValueAsString(records), new TypeReference<List<HotArticleVo>>() {
         });
         return ResponseResult.success(hotArticleVos);
@@ -71,20 +78,22 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleDao, Article> impleme
         queryWrapper
                 .eq(Article::getStatus, SystemConstants.ARTICLE_STATUS_NORMAL)
                 .orderByDesc(Article::getIsTop)
-                .eq(!ObjectUtils.isEmpty(categoryId) && categoryId>0,Article::getCategoryId,categoryId);
+                .eq(!ObjectUtils.isEmpty(categoryId) && categoryId > 0, Article::getCategoryId, categoryId);
 
 
         //结果封装,需要根据分类id查询到分类名称
         Page<Article> articlePage = articleDao.selectPage(page, queryWrapper);
         List<Article> records = articlePage.getRecords();
         records.stream().forEach(article -> {
+            Integer viewCount = redisCache.getCacheMapValue("article:viewCount", article.getId().toString());
+            article.setViewCount(viewCount.longValue());
             Long id = article.getCategoryId();
             Category category = categoryDao.selectById(id);
             article.setCategoryName(category.getName());
         });
         List<ArticleListVo> data = objectMapper.readValue(objectMapper.writeValueAsString(records), new TypeReference<List<ArticleListVo>>() {
         });
-        PageVo<List<ArticleListVo>> pageVo = new PageVo<>(data,page.getTotal());
+        PageVo<List<ArticleListVo>> pageVo = new PageVo<>(data, page.getTotal());
         return ResponseResult.success(pageVo);
     }
 
@@ -92,13 +101,22 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleDao, Article> impleme
     public ResponseResult articleInfo(String id) throws JsonProcessingException {
         //查询条件：1.文章id
         Article article = articleDao.selectById(id);
+        Integer viewCount = redisCache.getCacheMapValue(KeyConstant.VIEW_COUNT, id.toString());
+        article.setViewCount(viewCount.longValue());
         Category category = categoryDao.selectById(article.getCategoryId());
-        if(!ObjectUtils.isEmpty(category)){
+        if (!ObjectUtils.isEmpty(category)) {
             article.setCategoryName(category.getName());
         }
         ArticleInfoVo articleInfoVo = objectMapper.readValue(objectMapper.writeValueAsString(article), new TypeReference<ArticleInfoVo>() {
         });
         return ResponseResult.success(articleInfoVo);
+    }
+
+    @Override
+    public ResponseResult updateViewCount(Long id) {
+        //更新redis中对应 id的浏览量
+        redisCache.incrementCacheMapValue("article:viewCount", id.toString(), 1);
+        return ResponseResult.success(null);
     }
 
 

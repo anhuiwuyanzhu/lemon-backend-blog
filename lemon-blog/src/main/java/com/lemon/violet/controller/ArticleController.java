@@ -31,16 +31,15 @@ public class ArticleController {
         return ret;
     }
 
-    @PutMapping("/updateViewCount/{id}")
-    @ApiOperation(value = "增加阅读数",notes = "增加阅读数")
-    public ResponseResult updateViewCount(@PathVariable(name = "id") String id){
-        return null;
-    }
-
     @GetMapping("/{id}")
     @ApiOperation(value = "查询文章详情",notes = "查询文章详情")
     public ResponseResult queryArticleInfo(@PathVariable(name = "id") String id) throws JsonProcessingException {
         return articleService.articleInfo(id);
+    }
+
+    @PutMapping("/updateViewCount/{id}")
+    public ResponseResult updateViewCount(@PathVariable("id") Long id){
+        return articleService.updateViewCount(id);
     }
 
 }

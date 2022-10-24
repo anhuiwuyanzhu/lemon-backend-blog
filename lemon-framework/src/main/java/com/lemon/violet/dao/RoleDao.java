@@ -3,6 +3,9 @@ package com.lemon.violet.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lemon.violet.pojo.entity.Role;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * 角色信息表(SysRole)表数据库访问层
@@ -13,5 +16,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface RoleDao extends BaseMapper<Role> {
 
+    List<String> selectRoleKeyByUserId(@Param("id") Long id);
 }
 

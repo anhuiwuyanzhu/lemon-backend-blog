@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lemon.violet.pojo.dto.LoginUser;
 import com.lemon.violet.pojo.entity.User;
+import com.lemon.violet.pojo.rto.LoginRto;
 import com.lemon.violet.pojo.vo.AdminUserInfoVo;
 import com.lemon.violet.pojo.vo.ResponseResult;
 import com.lemon.violet.pojo.vo.UserInfoVo;
@@ -34,8 +35,8 @@ public class UserController {
     private ObjectMapper objectMapper;
 
     @PostMapping("/user/login")
-    public ResponseResult login(@Validated @RequestBody User user) throws JsonProcessingException {
-        return userService.login(user);
+    public ResponseResult login(@Validated @RequestBody LoginRto loginRto) throws JsonProcessingException {
+        return userService.login(loginRto);
     }
     @PostMapping("/user/logout")
     public ResponseResult logout(){
@@ -49,8 +50,8 @@ public class UserController {
         //根据用户id查询权限信息
         List<String> perms = menuService.selectPermsByUserId(loginUser.getUser().getId());
         //根据用户id查询角色信息
-//        List<String> roleKeyList = roleService.selectRoleKeyByUserId(loginUser.getUser().getId());
-        List<String> roleKeyList = null;
+        List<String> roleKeyList = roleService.selectRoleKeyByUserId(loginUser.getUser().getId());
+//        List<String> roleKeyList = null;
 
         //获取用户信息
         User user = loginUser.getUser();

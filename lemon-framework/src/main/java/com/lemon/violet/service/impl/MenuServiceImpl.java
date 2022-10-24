@@ -7,6 +7,7 @@ import com.lemon.violet.pojo.entity.Menu;
 import com.lemon.violet.service.MenuService;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -18,11 +19,17 @@ import java.util.List;
 @Service("sysMenuService")
 public class MenuServiceImpl extends ServiceImpl<MenuDao, Menu> implements MenuService {
 
+    @Resource
+    private MenuDao menuDao;
     @Override
     public List<String> selectPermsByUserId(Long id) {
-        LambdaQueryWrapper<Menu> queryWrapper = new LambdaQueryWrapper<>();
-//        queryWrapper.eq(Menu::get);
-        return null;
+        List<String> perms = null;
+        if(id == 1){
+            perms =  menuDao.selectAllPerms(id);
+        }else {
+            perms = menuDao.selectPermsByUserId(id);
+        }
+        return perms;
     }
 }
 

@@ -3,6 +3,8 @@ package com.lemon.violet.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.lemon.violet.pojo.entity.Role;
 
+import java.util.List;
+
 /**
  * 角色信息表(SysRole)表服务接口
  *
@@ -11,5 +13,6 @@ import com.lemon.violet.pojo.entity.Role;
  */
 public interface RoleService extends IService<Role> {
 
+    List<String> selectRoleKeyByUserId(Long id);
 }
 
